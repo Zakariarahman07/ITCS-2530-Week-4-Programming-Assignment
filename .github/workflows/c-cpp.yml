@@ -1,26 +1,45 @@
 name: C++ CI
 
-on: [push, pull_request]
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
 
 jobs:
-  build_and_test:
+  build:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4 # Checks out your repository
+    - name: Checkout code
+      uses: actions/checkout@v3
 
-    - name: Install dependencies (optional)
+    - name: Install g++
+      run: sudo apt-get update && sudo apt-get install -y g++
+
+    - name: Compile program
+      run: g++ main.cpp -o main
+
+    - name: Run program with predefined input
       run: |
-        sudo apt-get update
-        sudo apt-get install -y build-essential cmake
-
-    - name: Configure CMake
-      run: cmake -B build
-
-    - name: Build project
-      run: cmake --build build
-
-    - name: Run tests
-      run: |
-        cd build
-        ./your_test_executable # Replace with the actual name of your test executable
+        cat <<EOF | ./main
+        Zakaria Rahman
+        Algebra
+        25
+        7
+        +
+        10
+        -
+        10
+        *
+        10
+        /
+        10
+        %
+        10
+        Ali
+        12345
+        A
+        95
+        N
+        EOF
