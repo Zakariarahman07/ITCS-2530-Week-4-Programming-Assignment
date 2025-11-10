@@ -67,6 +67,7 @@ int main()
 
 
     cout << "Enter number of Math Problems you solved per week : ";
+
     // Input Validation and using while loop for entering again
     while (!(cin >> problemsSolvedPerWeek)){
         cin.clear();
@@ -76,22 +77,20 @@ int main()
     cout << endl;
 
     cout << "On a scale of 1 to 10, how confident are you in Math? (1 being least and 10 being most): ";
-    // Input Validation (FIXED: Added stream clear/ignore to prevent issues)
+
     if (!(cin >> confidenceLevel)){
-        cout << "\nInvalid input. Setting confidence level to 5." << endl;
+        cout << "\nInvalid input.." << endl;
         cin.clear();
         cin.ignore(1000, '\n');
-        confidenceLevel = 5; // Default value to continue program flow
     }
     cout << endl;
 
     cout << "Enter number of hours you spend studying Math per week: ";
     // Input Validation (FIXED: Added stream clear/ignore to prevent issues)
     if (!(cin >> hoursSpentStudyingPerWeek)){
-        cout << "\nInvalid input. Setting study hours to 1.0." << endl;
+        cout << "\nInvalid input." << endl;
         cin.clear();
         cin.ignore(1000, '\n');
-        hoursSpentStudyingPerWeek = 1.0; // Default value to continue program flow
     }
     cout << endl;
 
@@ -143,12 +142,7 @@ int main()
 
         cout << randomNum1 << " " << userChoiceMathOperator << " " << randomNum2 << " = ";
         
-        // Input Validation (FIXED: Added loop to handle non-integer input for userAnswer)
-        while (!(cin >> userAnswer)) {
-            cout << "\nInvalid input. Please enter a whole number answer: " << endl;
-            cin.clear(); // Clear the error flags
-            cin.ignore(1000, '\n'); // Discard the bad input
-        }
+        cin >> userAnswer;
         cout << endl;
 
         if (userAnswer == result) {
@@ -219,11 +213,8 @@ int main()
 
         cout << "Please enter the student's last test score: ";
         // Input validation for testScore
-        while (!(cin >> testScore)) {
-            cout << "\nInvalid input. Please enter a whole number test score: " << endl;
-            cin.clear();
-            cin.ignore(1000, '\n');
-        }
+        
+        cin >> testScore;
         cout << endl;
 
         if (grade == 'A' || testScore >= 90){
