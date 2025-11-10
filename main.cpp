@@ -67,11 +67,11 @@ int main()
 
 
     cout << "Enter number of Math Problems you solved per week : ";
-    // Input Validation
-    if (!(cin >> problemsSolvedPerWeek)) {
-        cout << "\nInvalid input. Please restart/re-run the program with correct data type for input." << endl;
+    // Input Validation and using while loop for entering again
+    while (!(cin >> problemsSolvedPerWeek)){
         cin.clear();
         cin.ignore(1000, '\n');
+        cout << "Invalid input. Please enter a whole number: " << endl;
     }
     cout << endl;
 
