@@ -110,18 +110,10 @@ int main()
 
         cout << "Enter a math operator (+, -, *, / or %):  ";
         cin >> userChoiceMathOperator;
+        cout << endl;
 
         // Validating user input
         // Letting the user enter correct math operator 
-
-        while (userChoiceMathOperator != '+' && userChoiceMathOperator != '-' && userChoiceMathOperator != '*' && userChoiceMathOperator != '/' 
-            && userChoiceMathOperator != '%') 
-            {
-                cin.clear();
-                cin.ignore(1000, '\n');
-                cout << "Invalid Math Operator. Enter +, - , *, / or %: ";
-                cin >> userChoiceMathOperator;
-            }
 
         switch(userChoiceMathOperator) {
             case '+':
@@ -139,6 +131,9 @@ int main()
         case '%':
             result = randomNum1 % randomNum2;
             break;
+        default:
+            cout << "Invalid Operator. Moving to the next iteration." << endl;
+            continue;
         }
 
         cout << randomNum1 << " " << userChoiceMathOperator << " " << randomNum2 << " = ";
