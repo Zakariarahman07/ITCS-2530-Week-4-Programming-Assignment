@@ -110,7 +110,6 @@ int main()
 
         cout << "Enter a math operator (+, -, *, / or %):  ";
         cin >> userChoiceMathOperator;
-        cout << endl;
 
         // Validating user input
         // Letting the user enter correct math operator 
@@ -122,7 +121,6 @@ int main()
                 cin.ignore(1000, '\n');
                 cout << "Invalid Math Operator. Enter +, - , *, / or %: ";
                 cin >> userChoiceMathOperator;
-                cout << endl;
             }
 
         switch(userChoiceMathOperator) {
