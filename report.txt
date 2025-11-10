@@ -1,0 +1,5 @@
+Name:                                                   Zakaria Rahman
+Favorite Math Subject:                                        Geometry
+Confidence Level:                                                    8
+# of Hours Studying Math:                                         4.00
+Estimated Problems Solved Per Hour:                               5.00
