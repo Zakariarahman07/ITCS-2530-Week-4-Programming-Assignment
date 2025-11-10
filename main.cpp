@@ -76,20 +76,22 @@ int main()
     cout << endl;
 
     cout << "On a scale of 1 to 10, how confident are you in Math? (1 being least and 10 being most): ";
-    // Input Validation
+    // Input Validation (FIXED: Added stream clear/ignore to prevent issues)
     if (!(cin >> confidenceLevel)){
-        cout << "\nInvalid input. Please restart/re-run the program with correct data type for input." << endl;
+        cout << "\nInvalid input. Setting confidence level to 5." << endl;
         cin.clear();
         cin.ignore(1000, '\n');
+        confidenceLevel = 5; // Default value to continue program flow
     }
     cout << endl;
 
     cout << "Enter number of hours you spend studying Math per week: ";
-    // Input Validation
+    // Input Validation (FIXED: Added stream clear/ignore to prevent issues)
     if (!(cin >> hoursSpentStudyingPerWeek)){
-        cout << "\nInvalid input. Please restart/re-run the program with correct data type for input." << endl;
+        cout << "\nInvalid input. Setting study hours to 1.0." << endl;
         cin.clear();
         cin.ignore(1000, '\n');
+        hoursSpentStudyingPerWeek = 1.0; // Default value to continue program flow
     }
     cout << endl;
 
@@ -107,6 +109,9 @@ int main()
     for (int i = 1; i <= 5; i++){
         randomNum1 = (rand() % 100) + 1;
         randomNum2 = (rand() % 100) + 1;
+
+        // Ensure the input stream is clean before reading the operator
+        cin.ignore(1000, '\n'); 
 
         cout << "Enter a math operator (+, -, *, / or %):  ";
         cin >> userChoiceMathOperator;
@@ -137,14 +142,20 @@ int main()
         }
 
         cout << randomNum1 << " " << userChoiceMathOperator << " " << randomNum2 << " = ";
-        cin >> userAnswer;
+        
+        // Input Validation (FIXED: Added loop to handle non-integer input for userAnswer)
+        while (!(cin >> userAnswer)) {
+            cout << "\nInvalid input. Please enter a whole number answer: " << endl;
+            cin.clear(); // Clear the error flags
+            cin.ignore(1000, '\n'); // Discard the bad input
+        }
         cout << endl;
 
         if (userAnswer == result) {
             cout << "Correct! Well Done!" << endl;
             noOfCorrectAnswers++;
         } else {
-            cout << "Wrong Answer! Nice Try!" << endl;
+            cout << "Wrong Answer! Nice Try! The correct answer was: " << result << endl;
         }
 
         cout << endl;
@@ -189,6 +200,9 @@ int main()
         cout << "Error opening the file." << endl;
         return -1;
     }
+    
+    // Consume any leftover newline before the do-while loop starts reading strings
+    cin.ignore(1000, '\n'); 
 
     do {
         cout << "Enter student's last name: ";
@@ -204,7 +218,12 @@ int main()
         cout << endl;
 
         cout << "Please enter the student's last test score: ";
-        cin >> testScore;
+        // Input validation for testScore
+        while (!(cin >> testScore)) {
+            cout << "\nInvalid input. Please enter a whole number test score: " << endl;
+            cin.clear();
+            cin.ignore(1000, '\n');
+        }
         cout << endl;
 
         if (grade == 'A' || testScore >= 90){
