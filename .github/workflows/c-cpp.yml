@@ -1,4 +1,4 @@
-name: C++ CI
+name: C++ CI with Testing
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
     branches: [ main ]
 
 jobs:
-  build:
+  build-and-test:
     runs-on: ubuntu-latest
 
     steps:
@@ -18,7 +18,18 @@ jobs:
       run: sudo apt-get update && sudo apt-get install -y g++
 
     - name: Compile C++ program
-      run: g++ main.cpp -o main
+      run: g++ -Wall -Wextra -pedantic main.cpp -o main
 
-    - name: Run program
-      run: ./main
+    - name: Create test input
+      run: |
+        echo "+\n5\n3" > input.txt   # Example input your program expects
+
+    - name: Create expected output
+      run: |
+        echo "Result: 8" > expected_output.txt  # Adjust to what your program prints
+
+    - name: Run program with input
+      run: ./main < input.txt > output.txt
+
+    - name: Check output
+      run: diff output.txt expected_output.txt
