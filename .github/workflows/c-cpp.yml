@@ -1,35 +1,26 @@
-name: C++ CI with Testing
+name: C++ CI
 
-on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+on: [push, pull_request]
 
 jobs:
-  build-and-test:
+  build_and_test:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
+    - uses: actions/checkout@v4 # Checks out your repository
 
-    - name: Install g++
-      run: sudo apt-get update && sudo apt-get install -y g++
-
-    - name: Compile C++ program
-      run: g++ -Wall -Wextra -pedantic main.cpp -o main
-
-    - name: Create test input
+    - name: Install dependencies (optional)
       run: |
-        echo "+\n5\n3" > input.txt   # Example input your program expects
+        sudo apt-get update
+        sudo apt-get install -y build-essential cmake
 
-    - name: Create expected output
+    - name: Configure CMake
+      run: cmake -B build
+
+    - name: Build project
+      run: cmake --build build
+
+    - name: Run tests
       run: |
-        echo "Result: 8" > expected_output.txt  # Adjust to what your program prints
-
-    - name: Run program with input
-      run: ./main < input.txt > output.txt
-
-    - name: Check output
-      run: diff output.txt expected_output.txt
+        cd build
+        ./your_test_executable # Replace with the actual name of your test executable
