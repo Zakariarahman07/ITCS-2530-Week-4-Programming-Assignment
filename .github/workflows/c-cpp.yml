@@ -11,27 +11,35 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    # 1️⃣ Checkout the code
-    - name: Checkout repository
+    - name: Checkout code
       uses: actions/checkout@v3
 
-    # 2️⃣ Install the C++ compiler
     - name: Install g++
       run: sudo apt-get update && sudo apt-get install -y g++
 
-    # 3️⃣ Compile the C++ program
     - name: Compile program
       run: g++ main.cpp -o main
 
-    # 4️⃣ Run program with simulated input
-    # Each \n represents pressing ENTER after a line of input
-    - name: Run program with automated input
+    - name: Run program with predefined input
       run: |
-        echo -e "Zakaria Rahman\nAlgebra\n25\n7\n5\n+\n+\n-\n*\n/\n10\nAli\n12345\nA\n95\nN\n" | ./main
-
-    # 5️⃣ Check generated output files (optional)
-    - name: Display report.txt contents
-      run: cat report.txt || echo "report.txt not found"
-
-    - name: Display StudentsReportCard.txt contents
-      run: cat StudentsReportCard.txt || echo "StudentsReportCard.txt not found"
+        cat <<EOF | ./main
+        Zakaria Rahman
+        Algebra
+        25
+        7
+        +
+        10
+        -
+        10
+        *
+        10
+        /
+        10
+        %
+        10
+        Ali
+        12345
+        A
+        95
+        N
+        EOF
